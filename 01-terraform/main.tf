@@ -9,7 +9,7 @@ data "http" "myip" {
 resource "aws_instance" "ec2-jenkins_nginx" {
   ami                         = "ami-054a31f1b3bf90920" # data.aws_ami.ubuntu.id
   subnet_id                   = "subnet-03575db38d50158f1"
-  instance_type               = "t2.medium"
+  instance_type               = "t2.micro"
   key_name                    = "key-dev-ernane-aws"
   associate_public_ip_address = true
 
