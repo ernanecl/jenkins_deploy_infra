@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: "Update apt"
+      shell: "apt-get update"
+      
+    # # TODO instalar terraform
+    - name: "Instala ansible"
+      shell: "sudo apt install ansible -y"
+        
+    - name: "Update apt"
+      shell: "apt-get update"
+    
+# https://learn.hashicorp.com/tutorials/terraform/install-cli
+    

@@ -1,0 +1,20 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: "Update apt"
+      shell: "apt-get update"
+
+    - name: "Instala unzip"
+      shell: "sudo apt install unzip -y"
+
+    - name: "Instala awscli"
+      shell: "apt install awscli -y"
+      
+    - name: "Instala ansible"
+      shell: "sudo apt install ansible -y"
+   
+    - name: "Update apt"
+      shell: "apt-get update"
+
+# https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu    
