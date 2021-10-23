@@ -2,15 +2,41 @@
   become: true
 
   tasks:
-    - name: "Update apt"
-      shell: "apt-get update"
+    ## Install Terraform
+    - name: "Update apt and curl"
+      shell: "sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl"
+
+    - nome: "Add the HashiCorp GPG key"
+      shell: "curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
       
-    # # TODO instalar terraform
-    - name: "Instala ansible"
-      shell: "sudo apt install ansible -y"
-        
+    - nome: "Add the official HashiCorp Linux repository"
+      shell: "sudo apt-add-repository \"deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main\""
+
+    - nome: "Update to add the repository, and install the Terraform CLI."
+      shell: "sudo apt-get update && sudo apt-get install terraform"
+
+    ## Enable tab completion
+    - nome: "Then install the autocomplete package."
+      shell: "terraform -install-autocomplete"
+
     - name: "Update apt"
       shell: "apt-get update"
     
-# https://learn.hashicorp.com/tutorials/terraform/install-cli
-    
+    ## Iniciar o Terraform (acesse o diretório onde o arquivo está)
+    # terraform init
+
+    ## Formatar arquivos com formato em Terraform
+    # terraform fmt
+
+    ## Validar o Terraform
+    # terraform validate
+
+    ## Ver todos as criações, modificações e exclusões antes de aplicar
+    # terraform plan
+
+    ## Executar o Terraform
+    # terraform apply
+
+    ## Links para mais informações
+    # https://learn.hashicorp.com/
+    # https://learn.hashicorp.com/tutorials/terraform/install-cli    
