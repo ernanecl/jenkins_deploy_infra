@@ -9,15 +9,12 @@
         update_cache: yes
         cache_valid_time: 86400 #Um dia
 
-    # check in join with next block
-    - name: "Instalar mvn"
-      shell: "sudo apt install maven -y"
-    
     - name: "Instalar pacotes em lote"
       apt:
         name: "{{ item }}"
         state: latest
-      become: yes # executar como sudo
+      become: yes # roda com sudo
       with_items:
         - default-jdk
-        - nginx
+        - maven
+        - nginx 
