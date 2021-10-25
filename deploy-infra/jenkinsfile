@@ -16,23 +16,23 @@ pipeline {
         }
     }
     stage('Build EC2') {
-            steps {
-                sh "jenkins/deploy-infra/deploy.sh"
-            }
+        steps {
+            sh "jenkins/deploy-infra/deploy.sh"
         }
-        stage('Test Nginx') {
-            steps {
-                sh "jenkins/deploy-infra/test.sh"
-            }
+    }
+    stage('Test Nginx') {
+        steps {
+            sh "jenkins/deploy-infra/test.sh"
         }
-        stage('Build AMI') {
-            steps {
-                sh "jenkins/deploy-infra/package-ami.sh"
-            }
+    }
+    stage('Build AMI') {
+        steps {
+            sh "jenkins/deploy-infra/package-ami.sh"
         }
-        stage('Destroy Test EC2') {
-            steps {
-                sh "jenkins/deploy-infra/destroy.sh"
-            }
+    }
+    stage('Destroy Test EC2') {
+        steps {
+            sh "jenkins/deploy-infra/destroy.sh"
         }
+    }
 }
