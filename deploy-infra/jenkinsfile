@@ -9,22 +9,22 @@ pipeline {
         }
         stage('Build EC2') {
             steps {
-                sh "jenkins_deploy_infra/deploy-infra/deploy.sh"
+                sh "/var/lib/jenkins/workspace/Infra\pipeline/deploy-infra/deploy.sh"
             }
         }
         stage('Test Nginx') {
             steps {
-                sh "jenkins_deploy_infra/deploy-infra/test.sh"
+                sh "/var/lib/jenkins/workspace/Infra\pipeline/deploy-infra/test.sh"
             }
         }
         stage('Build AMI') {
             steps {
-                sh "jenkins_deploy_infra/deploy-infra/package-ami.sh"
+                sh "/var/lib/jenkins/workspace/Infra\pipeline/deploy-infra/package-ami.sh"
             }
         }
         stage('Destroy Test EC2') {
             steps {
-                sh "jenkins_deploy_infra/deploy-infra/destroy.sh"
+                sh "/var/lib/jenkins/workspace/Infra\pipeline/deploy-infra/destroy.sh"
             }
         }
     }
