@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clone repository') {
             steps {
                 // Get some code from a GitHub repository
                 git url: 'https://github.com/ernanecl/jenkins', branch: 'main'
@@ -16,22 +16,22 @@ pipeline {
         }
         stage('Build EC2') {
             steps {
-                sh "jenkins/deploy-infra/deploy.sh"
+                sh "jenkins_deploy_infra/deploy-infra/deploy.sh"
             }
         }
         stage('Test Nginx') {
             steps {
-                sh "jenkins/deploy-infra/test.sh"
+                sh "jenkins_deploy_infra/deploy-infra/test.sh"
             }
         }
         stage('Build AMI') {
             steps {
-                sh "jenkins/deploy-infra/package-ami.sh"
+                sh "jenkins_deploy_infra/deploy-infra/package-ami.sh"
             }
         }
         stage('Destroy Test EC2') {
             steps {
-                sh "jenkins/deploy-infra/destroy.sh"
+                sh "jenkins_deploy_infra/deploy-infra/destroy.sh"
             }
         }
     }
