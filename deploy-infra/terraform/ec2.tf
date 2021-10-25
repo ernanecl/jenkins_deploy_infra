@@ -10,7 +10,7 @@ resource "aws_instance" "ec2-jenkins_nginx" {
   ami                         = "ami-054a31f1b3bf90920" # data.aws_ami.ubuntu.id
   subnet_id                   = "subnet-03575db38d50158f1"
   instance_type               = "t2.micro"
-  key_name                    = "key-dev-ernane-aws"
+  key_name                    = "key-dev-ernane-aws" ## TODO criar chave para instancia jenkins e substituir atual
   associate_public_ip_address = true
 
   root_block_device {
@@ -19,7 +19,7 @@ resource "aws_instance" "ec2-jenkins_nginx" {
   }
 
   tags = {
-    Name = "ec2-jenkins_nginx-${count.index}"
+    Name = "ec2-jenkins_nginx"
   }
 
   vpc_security_group_ids = [aws_security_group.jenkins_nginx.id]
@@ -75,6 +75,7 @@ resource "aws_security_group" "jenkins_nginx" {
   }
 }
 
+# usar o comando "terraform refresh" para mostrar o output
 output "jenkins_nginx" {
   value = [
     "jenkins_nginx",
@@ -85,5 +86,3 @@ output "jenkins_nginx" {
     "ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.ec2-jenkins_nginx.public_dns}"
   ]
 }
-
-# terraform refresh para mostrar o ssh

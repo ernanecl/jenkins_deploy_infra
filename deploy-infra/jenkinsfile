@@ -15,24 +15,24 @@ pipeline {
             }
         }
     }
-    stage('Test') {
-        steps {
-            sh "mvn test"
+    stage('Build EC2') {
+            steps {
+                sh "jenkins/deploy-infra/deploy.sh"
+            }
         }
-    }
-    stage('Dev') {
-        steps {
-            sh "mvn dev"
+        stage('Test Nginx') {
+            steps {
+                sh "jenkins/deploy-infra/test.sh"
+            }
         }
-    }
-    stage('Stage') {
-        steps {
-            sh "mvn stage"
+        stage('Build AMI') {
+            steps {
+                sh "jenkins/deploy-infra/package-ami.sh"
+            }
         }
-    }
-    stage('Prod') {
-        steps {
-            sh "mvn prod"
+        stage('Destroy Test EC2') {
+            steps {
+                sh "jenkins/deploy-infra/destroy.sh"
+            }
         }
-    }
 }

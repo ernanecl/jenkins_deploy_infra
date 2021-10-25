@@ -2,18 +2,22 @@
   become: true
 
   tasks:
-    - name: "Roda: sudo apt update"
+    - name: "Running: sudo apt update"
       become: yes
       apt:
         upgrade: yes
         update_cache: yes
         cache_valid_time: 86400 #Um dia
+
+    # check in join with next block
+    - name: "Instalar mvn"
+      shell: "sudo apt install maven -y"
     
-    - name: "Instala pacotes em lote"
+    - name: "Instalar pacotes em lote"
       apt:
         name: "{{ item }}"
         state: latest
-      become: yes # roda com sudo
+      become: yes # executar como sudo
       with_items:
         - default-jdk
         - nginx
